@@ -13,7 +13,7 @@ export default function ProductContainer(props) {
         .then((data) => setProduct(data));
     };
     response();
-  }, [props.match.params.id]);
+  }, [props.match]);
 
   return (
     <div>

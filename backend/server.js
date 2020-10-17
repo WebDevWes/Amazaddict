@@ -1,8 +1,11 @@
-const express = require("express");
-const products = require("./products");
+import express from "express";
+import dotenv from "dotenv";
+import products from "./products.js";
+
+dotenv.config();
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.get("/", (req, res) => {
   res.send("Backend running!");
