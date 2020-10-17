@@ -2,6 +2,7 @@ const express = require("express");
 const products = require("./products");
 
 const app = express();
+const PORT = 3001;
 
 app.get("/", (req, res) => {
   res.send("Backend running!");
@@ -16,4 +17,4 @@ app.get("/api/products/:id", (req, res) => {
   res.json(product);
 });
 
-app.listen(3000, console.log("Server running on port 3000"));
+app.listen(PORT, console.log(`Server running on port ${PORT}`));
