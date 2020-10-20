@@ -3,11 +3,12 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import products from "./products.js";
 
+const app = express();
+
 dotenv.config();
 
 connectDB();
 
-const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.get("/", (req, res) => {
