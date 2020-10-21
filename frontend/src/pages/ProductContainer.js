@@ -5,6 +5,7 @@ import Rating from "../components/Rating";
 
 export default function ProductContainer(props) {
   const [product, setProduct] = useState({});
+  console.log(props.match);
 
   useEffect(() => {
     const response = async () => {
