@@ -8,19 +8,14 @@ import Loader from "../components/Loader";
 import { listProductDetails } from "../actions/productActions";
 
 export default function ProductContainer(props) {
-  console.log(props.match);
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.productDetails);
-  const { loading, error } = productDetails;
-
-  console.log(productDetails);
+  const { loading, error, product } = productDetails;
 
   useEffect(() => {
     dispatch(listProductDetails(props.match.params.id));
   }, [dispatch, props.match]);
-
-  const product = [];
 
   return (
     <div>
