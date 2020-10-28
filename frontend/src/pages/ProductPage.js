@@ -16,7 +16,7 @@ import Loader from "../components/Loader";
 import { listProductDetails } from "../actions/productActions";
 
 export default function ProductContainer(props) {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   const dispatch = useDispatch();
 
