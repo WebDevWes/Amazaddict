@@ -20,3 +20,8 @@ export const authUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid email/password combination");
   }
 });
+
+// Get user profile
+export const getUserProfile = asyncHandler(async (req, res) => {
+  res.send("GOT HERE");
+});
