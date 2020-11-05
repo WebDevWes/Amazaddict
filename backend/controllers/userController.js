@@ -3,6 +3,8 @@ import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
 
 // Authorize user login w/ email & password, get token
+// POST /api/users/login
+
 export const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email: email });
@@ -22,9 +24,10 @@ export const authUser = asyncHandler(async (req, res) => {
 });
 
 // Get user profile
+// GET /api/users/profile
+
 export const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
-
   if (user) {
     res.json({
       _id: user._id,
