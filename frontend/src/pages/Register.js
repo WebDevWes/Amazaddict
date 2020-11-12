@@ -76,7 +76,7 @@ export default function Register(props) {
         </Form.Group>
 
         <Form.Group controlId="confirmPass">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Confirm Password"
