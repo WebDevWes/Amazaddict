@@ -3,6 +3,7 @@ import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
   CART_SHIPPING_ADDRESS,
+  CART_PAYMENT_METHOD,
 } from "../constants/cartConstant";
 
 export const addToCart = (id, quantity) => async (dispatch, getState) => {
@@ -38,4 +39,13 @@ export const shippingAddress = (data) => (dispatch) => {
   });
 
   localStorage.setItem("shippingAddress", JSON.stringify(data));
+};
+
+export const paymentMethod = (data) => (dispatch) => {
+  dispatch({
+    type: CART_PAYMENT_METHOD,
+    payload: data,
+  });
+
+  localStorage.setItem("paymentMethod", JSON.stringify(data));
 };
