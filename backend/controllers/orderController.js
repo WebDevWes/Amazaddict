@@ -36,7 +36,7 @@ export const addOrderItems = asyncHandler(async (req, res) => {
 
 // Get an order by ID , GET /api/orders/:id
 export const getOrderItems = asyncHandler(async (req, res) => {
-  const order = await (await Order.findById(req.params.id)).populate(
+  const order = await Order.findById(req.params.id).populate(
     "user",
     "name email"
   );

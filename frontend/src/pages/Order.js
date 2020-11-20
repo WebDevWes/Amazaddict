@@ -30,7 +30,7 @@ export default function Order(props) {
 
   useEffect(() => {
     dispatch(getOrder(orderId));
-    console.log(orderId);
+    console.log(order);
   }, []);
 
   return loading ? (
