@@ -29,9 +29,10 @@ export default function Order(props) {
   }
 
   useEffect(() => {
-    dispatch(getOrder(orderId));
-    console.log(order);
-  }, []);
+    if (!order || order._id !== orderId) {
+      dispatch(getOrder(orderId));
+    }
+  }, [order, orderId]);
 
   return loading ? (
     <Loader />
