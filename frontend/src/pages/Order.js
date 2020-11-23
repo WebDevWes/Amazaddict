@@ -32,7 +32,7 @@ export default function Order(props) {
     if (!order || order._id !== orderId) {
       dispatch(getOrder(orderId));
     }
-  }, [order, orderId]);
+  }, [dispatch, order, orderId]);
 
   return loading ? (
     <Loader />
