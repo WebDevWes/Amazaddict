@@ -13,11 +13,11 @@ export default function Header() {
             <Nav className='mr-auto'>
               <Nav.Link href='/cart'>
                 {' '}
-                <i className='fas fa-shopping-cart' />
+                <i className='fas fa-shopping-cart nav-icon' />
                 Cart
               </Nav.Link>
               <Nav.Link href='/login'>
-                <i className='fas fa-user' />
+                <i className='fas fa-user nav-icon' />
                 Sign In
               </Nav.Link>
             </Nav>
