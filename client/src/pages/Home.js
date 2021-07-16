@@ -1,5 +1,5 @@
 import { Row, Col } from 'react-bootstrap'
-import Product from '../components/Product'
+import ProductCard from '../components/ProductCard'
 import products from '../products'
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
       <Row>
         {products.map((product) => (
           <Col key={product._id} sm={12} md={6} lg={12} xl={3}>
-            <Product product={product} />
+            <ProductCard product={product} />
           </Col>
         ))}
       </Row>
