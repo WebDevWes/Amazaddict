@@ -1,0 +1,22 @@
+{
+  "name": "amazaddict",
+  "version": "1.0.0",
+  "description": "E-Commerce App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebDevWes/Amazaddict.git"
+  },
+  "author": "Wesley Tran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WebDevWes/Amazaddict/issues"
+  },
+  "homepage": "https://github.com/WebDevWes/Amazaddict#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

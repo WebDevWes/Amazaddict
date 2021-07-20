@@ -1,8 +1,19 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Row, Col } from 'react-bootstrap'
 import ProductCard from '../components/ProductCard'
-import products from '../products'
 
 export default function Home() {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get('/api/products')
+      setProducts(data)
+    }
+    fetchProducts()
+  }, [])
+
   return (
     <>
       <h1 className='mt-3'>Latest Products</h1>
