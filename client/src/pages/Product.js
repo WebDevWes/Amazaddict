@@ -13,7 +13,7 @@ export default function Product({ match }) {
       setProduct(data)
     }
     fetchProduct()
-  }, [])
+  }, [match])
 
   return (
     <>
