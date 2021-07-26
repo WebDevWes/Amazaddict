@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import connectDB from './config/connection.js'
-import products from './data/products.js'
+import products from './routes/product.js'
 
 dotenv.config() || 3001
 
@@ -15,14 +15,7 @@ app.get('/', (req, res) => {
   res.send("You hit the '/' endpoint, nothing to see here")
 })
 
-app.get('/api/products', (req, res) => {
-  res.json(products)
-})
-
-app.get('/api/products/:id', (req, res) => {
-  const item = products.find((product) => product._id === req.params.id)
-  res.json(item)
-})
+app.use('/api/products', products)
 
 app.listen(
   PORT,
