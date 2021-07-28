@@ -4,22 +4,25 @@ import connectDB from './config/connection.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import products from './routes/product.js'
 
-dotenv.config() || 3001
-
+// Initialize environment Variable
+dotenv.config()
+// Connect to MongoDB
 connectDB()
 
 const app = express()
 
 const PORT = process.env.PORT
 
+// Home Route "/"
 app.get('/', (req, res) => {
   res.send("You hit the '/' endpoint, nothing to see here")
 })
 
+// Product routes "/api/products" || "/api/products/:id"
 app.use('/api/products', products)
 
+// Error Handling Middleware
 app.use(notFound)
-
 app.use(errorHandler)
 
 app.listen(

@@ -7,6 +7,7 @@ import axios from 'axios'
 export default function Product({ match }) {
   const [product, setProduct] = useState({})
 
+  // Fetch single product from match.params on page load
   useEffect(() => {
     const fetchProduct = async () => {
       const { data } = await axios.get(`/api/products/${match.params.id}`)

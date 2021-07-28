@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard'
 export default function Home() {
   const [products, setProducts] = useState([])
 
+  // Fetch product on page load
   useEffect(() => {
     const fetchProducts = async () => {
       const { data } = await axios.get('/api/products')
