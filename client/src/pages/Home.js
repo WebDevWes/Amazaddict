@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import ProductCard from '../components/ProductCard'
 import { listProducts } from '../redux/actions/productActions'
+import ProductCard from '../components/ProductCard'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
 
 export default function Home() {
   // Initialize useDispatch
@@ -22,9 +24,9 @@ export default function Home() {
     <>
       <h1 className='mt-3'>New Products</h1>
       {loading ? (
-        <h1>Temporary Loading</h1>
+        <Loader />
       ) : error ? (
-        <h1>{error}</h1>
+        <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
           {products.map((product) => (
