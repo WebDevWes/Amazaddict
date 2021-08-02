@@ -1,4 +1,3 @@
-import React from 'react'
 import { Spinner } from 'react-bootstrap'
 
 export default function Loader() {
@@ -12,7 +11,7 @@ export default function Loader() {
         width: '100px',
         height: '100px',
       }}>
-      <span class='sr-only'>In Progress...</span>
+      <span className='sr-only'>In Progress...</span>
     </Spinner>
   )
 }
