@@ -13,7 +13,9 @@ const reducer = combineReducers({
 
 // Initial State for store
 const initialState = {
-  cart: { cartProducts: JSON.parse(localStorage.getItem('cartItems')) || [] },
+  cart: {
+    cartProducts: JSON.parse(localStorage.getItem('cartProducts')) || [],
+  },
 }
 
 // Applying middlware into composeWithDevTools

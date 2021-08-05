@@ -9,7 +9,7 @@ import {
 
 // Initial State for products
 const initialState = {
-  loading: false,
+  loading: true,
   products: [],
   error: '',
   product: { reviews: [] },

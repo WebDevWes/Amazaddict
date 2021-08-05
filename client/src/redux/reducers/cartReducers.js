@@ -1,4 +1,7 @@
-import { CART_ADD_PRODUCT } from '../constants/cartConstants'
+import {
+  CART_ADD_PRODUCT,
+  CART_REMOVE_PRODUCT,
+} from '../constants/cartConstants'
 
 // Initial State for cart
 const initialState = {
@@ -11,7 +14,7 @@ export const cart = (state = initialState, action) => {
     case CART_ADD_PRODUCT:
       const product = action.payload
       const existProduct = state.cartProducts.find(
-        (x) => x.product === product.product
+        (prod) => prod.product === product.product
       )
 
       if (existProduct) {
@@ -26,6 +29,13 @@ export const cart = (state = initialState, action) => {
           ...state,
           cartProducts: [...state.cartProducts, product],
         }
+      }
+    case CART_REMOVE_PRODUCT:
+      return {
+        ...state,
+        cartProducts: state.cartProducts.filter(
+          ({ product }) => product !== action.payload
+        ),
       }
     default:
       return state

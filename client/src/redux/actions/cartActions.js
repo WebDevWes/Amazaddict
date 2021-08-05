@@ -1,5 +1,8 @@
 import axios from 'axios'
-import { CART_ADD_PRODUCT } from '../constants/cartConstants'
+import {
+  CART_ADD_PRODUCT,
+  CART_REMOVE_PRODUCT,
+} from '../constants/cartConstants'
 
 // Action to pass product detail to reducer to be saved in global state
 export const addToCart = (id, quantity) => async (dispatch, getState) => {
@@ -20,6 +23,18 @@ export const addToCart = (id, quantity) => async (dispatch, getState) => {
   })
 
   // Save to LocalStorage at the same time
+  localStorage.setItem(
+    'cartProducts',
+    JSON.stringify(getState().cart.cartProducts)
+  )
+}
+
+export const removeFromCart = (id) => (dispatch, getState) => {
+  dispatch({
+    type: CART_REMOVE_PRODUCT,
+    payload: id,
+  })
+
   localStorage.setItem(
     'cartProducts',
     JSON.stringify(getState().cart.cartProducts)
