@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import connectDB from './config/connection.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import products from './routes/product.js'
+import users from './routes/user.js'
 
 // Initialize environment Variable
 dotenv.config()
@@ -10,6 +11,7 @@ dotenv.config()
 connectDB()
 
 const app = express()
+app.use(express.json())
 
 const PORT = process.env.PORT
 
@@ -20,6 +22,9 @@ app.get('/', (req, res) => {
 
 // Product routes "/api/products" || "/api/products/:id"
 app.use('/api/products', products)
+
+// Product routes "/api/users"
+app.use('/api/users', users)
 
 // Error Handling Middleware
 app.use(notFound)
