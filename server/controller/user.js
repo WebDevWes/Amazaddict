@@ -2,6 +2,38 @@ import asyncHandler from 'express-async-handler'
 import User from '../models/User.js'
 import generateToken from '../utils/token.js'
 
+// Function to create a new User using Email and Password
+export const register = asyncHandler(async (req, res) => {
+  const exist = await User.findOne({ email: req.body.email })
+
+  if (exist) {
+    res.status(400)
+    throw new Error('User already exists')
+  }
+
+  const newUser = await User.create({
+    email: req.body.email,
+    password: req.body.password,
+    name: req.body.name,
+  })
+
+  const { _id, name, email, isAdmin } = newUser
+
+  if (newUser) {
+    console.log({ newUser })
+    res.status(201).json({
+      _id: _id,
+      name: name,
+      email: email,
+      isAdmin: isAdmin,
+      token: generateToken(_id),
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid')
+  }
+})
+
 // Function to Authenticate the User using Email and Password
 export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body

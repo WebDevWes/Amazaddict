@@ -31,6 +31,16 @@ userSchema.methods.checkPassword = async function (pass) {
   return await bcrypt.compare(pass, this.password)
 }
 
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next()
+  }
+
+  const saltRounds = 10
+  const salt = await bcrypt.genSalt(saltRounds)
+  this.password = await bcrypt.hash(this.password, salt)
+})
+
 const User = mongoose.model('User', userSchema)
 
 export default User
