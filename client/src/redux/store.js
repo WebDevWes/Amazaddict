@@ -3,18 +3,23 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { productList, productDetails } from './reducers/productReducers'
 import { cart } from './reducers/cartReducers'
+import { userLogin } from './reducers/userReducers'
 
 // Combine multiple Reducers into one
 const reducer = combineReducers({
   productList,
   productDetails,
   cart,
+  userLogin,
 })
 
 // Initial State for store
 const initialState = {
   cart: {
     cartProducts: JSON.parse(localStorage.getItem('cartProducts')) || [],
+  },
+  userLogin: {
+    userData: JSON.parse(localStorage.getItem('userInfo')) || null,
   },
 }
 
