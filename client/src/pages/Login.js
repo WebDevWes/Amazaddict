@@ -2,20 +2,38 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
-import Mesasge from '../components/Message'
+import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { login } from '../redux/actions/userActions'
 import FormContainer from '../components/FormContainer'
 
-export default function Login({ redirect }) {
+export default function Login({ location, history }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const submitHandler = () => {}
+  const dispatch = useDispatch()
+
+  const { userLogin } = useSelector((state) => state)
+  const { loading, error, userData } = userLogin
+
+  const redirect = location.search ? location.search.split('=')[1] : '/'
+
+  useEffect(() => {
+    if (userData) {
+      history.push(redirect)
+    }
+  }, [history, userData, redirect])
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+    dispatch(login(email, password))
+  }
 
   return (
     <FormContainer>
       <h1>Sign In</h1>
+      {error && <Message variant='danger'>{error}</Message>}
+      {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='email'>
           <Form.Label>Email Address</Form.Label>
@@ -34,7 +52,7 @@ export default function Login({ redirect }) {
             onChange={(e) => setPassword(e.target.value)}></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>
+        <Button type='submit' variant='primary' className='mt-3'>
           Log In
         </Button>
       </Form>
