@@ -4,12 +4,15 @@ import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { login } from '../redux/actions/userActions'
+import { signup } from '../redux/actions/userActions'
 import FormContainer from '../components/FormContainer'
 
-export default function Login({ location, history }) {
+export default function Signup({ location, history }) {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPass, setConfirmPass] = useState('')
+  const [message, setMessage] = useState(null)
 
   const dispatch = useDispatch()
 
@@ -18,7 +21,7 @@ export default function Login({ location, history }) {
     userLogin: { loading, error, userData },
   } = useSelector((state) => state)
 
-  // Redirect if already logged in
+  // Redirect if user is already logged in
   const redirect = location.search ? location.search.split('=')[1] : '/'
   useEffect(() => {
     if (userData) {
@@ -26,18 +29,31 @@ export default function Login({ location, history }) {
     }
   }, [history, userData, redirect])
 
-  // Dispatches login to login action
+  // Submit handler, dispatches to signup action
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(login(email, password))
+    if (password !== confirmPass) {
+      setMessage('Passwords do not match')
+    } else {
+      dispatch(signup(email, password, name))
+    }
   }
 
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1>Sign Up</h1>
+      {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
+        <Form.Group controlId='name'>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type='name'
+            placeholder='Enter name'
+            value={name}
+            onChange={(e) => setName(e.target.value)}></Form.Control>
+        </Form.Group>
         <Form.Group controlId='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
@@ -54,16 +70,23 @@ export default function Login({ location, history }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}></Form.Control>
         </Form.Group>
-
+        <Form.Group controlId='confirmPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Confirm Password'
+            value={confirmPass}
+            onChange={(e) => setConfirmPass(e.target.value)}></Form.Control>
+        </Form.Group>
         <Button type='submit' variant='primary' className='mt-3'>
-          Log In
+          Sign Up
         </Button>
       </Form>
       <Row className='py-3'>
         <Col>
-          New Customer?{' '}
-          <Link to={redirect ? `/signup?redirect=${redirect}` : '/signup'}>
-            Register
+          Already have an Account?{' '}
+          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+            Login
           </Link>
         </Col>
       </Row>

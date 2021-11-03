@@ -13,9 +13,9 @@ export default function Product({ match, history }) {
   const dispatch = useDispatch()
 
   // Brings in product detail from global store
-  const { loading, error, product } = useSelector(
-    (state) => state.productDetails
-  )
+  const {
+    productDetails: { loading, error, product },
+  } = useSelector((state) => state)
 
   // Handler for adding to cart, push new url container product id and quantity
   const addToCartHandler = () => {

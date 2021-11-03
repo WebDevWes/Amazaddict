@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Product from './pages/Product'
 import Cart from './pages/Cart'
 import Login from './pages/Login'
+import Signup from './pages/Signup'
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <main>
         <Container>
           <Route path='/' exact component={Home} />
+          <Route path='/signup' component={Signup} />
           <Route path='/login' component={Login} />
           <Route path='/product/:id' component={Product} />
           <Route path='/cart/:id?' component={Cart} />
