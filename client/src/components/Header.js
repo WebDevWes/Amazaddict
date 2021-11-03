@@ -4,12 +4,14 @@ import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 import { logout } from '../redux/actions/userActions'
 
 export default function Header() {
+  // Brings in userData from global state
   const {
     userLogin: { userData },
   } = useSelector((state) => state)
 
   const dispatch = useDispatch()
 
+  // Handles logging out, clears localstorage
   const logoutHandler = () => {
     dispatch(logout())
   }

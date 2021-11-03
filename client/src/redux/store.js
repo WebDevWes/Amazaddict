@@ -3,7 +3,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { productList, productDetails } from './reducers/productReducers'
 import { cart } from './reducers/cartReducers'
-import { userLogin } from './reducers/userReducers'
+import { userLogin, userSignup } from './reducers/userReducers'
 
 // Combine multiple Reducers into one
 const reducer = combineReducers({
@@ -11,6 +11,7 @@ const reducer = combineReducers({
   productDetails,
   cart,
   userLogin,
+  userSignup,
 })
 
 // Initial State for store

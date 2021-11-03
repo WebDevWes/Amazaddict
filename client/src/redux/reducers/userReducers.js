@@ -3,9 +3,12 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_SIGNUP_FAIL,
+  USER_SIGNUP_REQUEST,
+  USER_SIGNUP_SUCCESS,
 } from '../constants/userConstants'
 
-// Handles user login requests, Queries and return user data is success
+// Handles user login requests, Queries and return user data if success
 // Empties out state if logout
 export const userLogin = (state = {}, action) => {
   switch (action.type) {
@@ -17,6 +20,20 @@ export const userLogin = (state = {}, action) => {
       return { loading: false, error: action.payload }
     case USER_LOGOUT:
       return {}
+    default:
+      return state
+  }
+}
+
+// Handles user signup requests, Creates and return user data if success
+export const userSignup = (state = {}, action) => {
+  switch (action.type) {
+    case USER_SIGNUP_REQUEST:
+      return { loading: true }
+    case USER_SIGNUP_SUCCESS:
+      return { loading: false, userData: action.payload }
+    case USER_SIGNUP_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }
