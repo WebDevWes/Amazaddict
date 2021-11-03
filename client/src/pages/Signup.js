@@ -18,7 +18,7 @@ export default function Signup({ location, history }) {
 
   // Get User info from Global State
   const {
-    userLogin: { loading, error, userData },
+    userSignup: { loading, error, userData },
   } = useSelector((state) => state)
 
   // Redirect if user is already logged in
