@@ -64,14 +64,42 @@ export const login = asyncHandler(async (req, res) => {
 
 // Get User Profile
 export const getUser = asyncHandler(async (req, res) => {
-  const { _id, name, email, isAdmin } = req.user
+  const user = await User.findById(req.user._id)
+  const { _id, name, email, isAdmin } = user
 
-  if (_id) {
+  if (user) {
     res.json({
       _id,
       name,
       email,
       isAdmin,
+    })
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+
+// Update User Profile
+export const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id)
+
+  if (user) {
+    user.name = req.body.name || user.name
+    user.email = req.body.email || user.email
+    if (req.body.password) {
+      user.password = req.body.password
+    }
+
+    const updatedUser = await user.save()
+    const { _id, name, email, isAdmin } = updatedUser
+
+    res.json({
+      _id,
+      name,
+      email,
+      isAdmin,
+      token: generateToken(_id),
     })
   } else {
     res.status(404)
