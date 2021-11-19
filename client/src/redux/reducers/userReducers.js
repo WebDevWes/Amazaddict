@@ -3,6 +3,9 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_PROFILE_FAIL,
+  USER_PROFILE_REQUEST,
+  USER_PROFILE_SUCCESS,
   USER_SIGNUP_FAIL,
   USER_SIGNUP_REQUEST,
   USER_SIGNUP_SUCCESS,
@@ -33,6 +36,20 @@ export const userSignup = (state = {}, action) => {
     case USER_SIGNUP_SUCCESS:
       return { loading: false, userData: action.payload }
     case USER_SIGNUP_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+// Handles user profile requests, update user profile
+export const userProfile = (state = { userData: {} }, action) => {
+  switch (action.type) {
+    case USER_PROFILE_REQUEST:
+      return { ...state, loading: true }
+    case USER_PROFILE_SUCCESS:
+      return { loading: false, userData: action.payload }
+    case USER_PROFILE_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state
