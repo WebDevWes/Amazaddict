@@ -90,7 +90,7 @@ export const login = (email, password) => async (dispatch) => {
 }
 
 // Action to retrieve profile for Profile page
-export const profile = (id) => async (dispatch, getState) => {
+export const getProfile = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_PROFILE_REQUEST,
@@ -99,8 +99,6 @@ export const profile = (id) => async (dispatch, getState) => {
     const {
       userLogin: { userData },
     } = getState()
-
-    console.log('userData', userData)
 
     const config = {
       headers: {

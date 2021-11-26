@@ -43,12 +43,12 @@ export const userSignup = (state = {}, action) => {
 }
 
 // Handles user profile requests, update user profile
-export const userProfile = (state = { userData: {} }, action) => {
+export const userProfile = (state = { profile: {} }, action) => {
   switch (action.type) {
     case USER_PROFILE_REQUEST:
       return { ...state, loading: true }
     case USER_PROFILE_SUCCESS:
-      return { loading: false, userData: action.payload }
+      return { loading: false, profile: action.payload }
     case USER_PROFILE_FAIL:
       return { loading: false, error: action.payload }
     default:

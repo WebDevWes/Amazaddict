@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { profile } from '../redux/actions/userActions'
+import { getProfile } from '../redux/actions/userActions'
 
 export default function Profile({ location, history }) {
   const [name, setName] = useState('')
@@ -15,28 +14,31 @@ export default function Profile({ location, history }) {
 
   const dispatch = useDispatch()
 
-  // Get User info from Global State
-  const { userProfile } = useSelector((state) => state)
+  // Get User Profile from Global State
+  const {
+    userProfile: { loading, error, profile },
+  } = useSelector((state) => state)
 
+  // Get User Login from Global State to check if user is logged in
   // Get User info from Global State
   const {
-    userLogin: { userData, loading, error },
+    userLogin: { userData },
   } = useSelector((state) => state)
 
   useEffect(() => {
     if (!userData) {
       history.push('/login')
     } else {
-      if (!userProfile.userData.name) {
-        dispatch(profile('profile'))
+      if (!profile.name) {
+        dispatch(getProfile('getuser'))
       } else {
-        setName(userProfile.userData.name)
-        setEmail(userProfile.userData.email)
+        setName(profile.name)
+        setEmail(profile.email)
       }
     }
-  }, [dispatch, history, userData, userProfile.userData])
+  }, [dispatch, history, userData, profile])
 
-  // Submit handler, dispatches to signup action
+  // Submit handler, dispatches to update profile action
   const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmPass) {
@@ -49,7 +51,7 @@ export default function Profile({ location, history }) {
   return (
     <Row>
       <Col md={3}>
-        <h1>User Profile</h1>
+        <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {loading && <Loader />}
