@@ -89,6 +89,7 @@ export const login = (email, password) => async (dispatch) => {
   }
 }
 
+// Action to retrieve profile for Profile page
 export const profile = (id) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -99,10 +100,12 @@ export const profile = (id) => async (dispatch, getState) => {
       userLogin: { userData },
     } = getState()
 
+    console.log('userData', userData)
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userData.toekn}`,
+        Authorization: `Bearer ${userData.token}`,
       },
     }
 
